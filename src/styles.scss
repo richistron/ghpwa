@@ -1,0 +1,18 @@
+@import '~bootstrap/scss/bootstrap';
+
+.App {
+  @extend .container;
+  padding-top: 20px;
+
+  .ghuser {
+    @extend .jumbotron;
+  }
+
+  .ghuserinfo {
+    margin: 20px 10px;
+
+    img {
+      margin-left: 20px;
+    }
+  }
+}
