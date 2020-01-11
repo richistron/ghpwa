@@ -18,8 +18,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: yarn build
-      run: |
-        yarn install
-        yarn build
+      run: make build SECRET=${{ secrets.SECRET }}
       env:
         CI: true
