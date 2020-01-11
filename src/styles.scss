@@ -7,4 +7,12 @@
   .ghuser {
     @extend .jumbotron;
   }
+
+  .ghuserinfo {
+    margin: 20px 10px;
+
+    img {
+      margin-left: 20px;
+    }
+  }
 }

@@ -5,7 +5,9 @@ import AppContext from './AppContext';
 
 const GhForm: React.FC = () => {
   const context = useContext(AppContext);
-  const [txt, setValue] = useState('');
+  const [txt, setValue] = useState(
+    (context && context.state.currentUser) || ''
+  );
   return (
     <form onSubmit={handleSubmit(txt, context)} className={'form-inline'}>
       <div className='form-group mx-sm-3 mb-2'>

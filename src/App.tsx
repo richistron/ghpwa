@@ -1,11 +1,12 @@
 import React from 'react';
-import AppContext, { reducer } from './AppContext';
 import './styles.scss';
 import GhForm from './GhForm';
 import UserInfo from './UserInfo';
+import appReducer from './appReducer';
+import AppContext from './AppContext';
 
 const App: React.FC = () => {
-  const [state, dispatch] = React.useReducer(reducer, reducer());
+  const [state, dispatch] = React.useReducer(appReducer, appReducer());
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <div className='App'>

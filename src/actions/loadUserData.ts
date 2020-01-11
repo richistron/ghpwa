@@ -1,4 +1,4 @@
-import {IRepos} from '../AppContext';
+import { IRepos } from "../appReducer";
 
 const loadUserData = async (username: string): Promise<IRepos[]> => {
   const response = await fetch(`https://api.github.com/users/${username}/repos`, {method: 'GET'});
