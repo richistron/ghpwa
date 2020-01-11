@@ -1,27 +1,24 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import handleInputChange from './actions/handleInputChange';
+import handleSubmit from './actions/handleSubmit';
+import AppContext from './AppContext';
 
 const GhForm: React.FC = () => {
+  const context = useContext(AppContext);
   const [txt, setValue] = useState('');
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    console.log('form sent', txt);
-  };
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
   return (
-    <form onSubmit={handleSubmit} className={'form-inline'}>
+    <form onSubmit={handleSubmit(txt, context)} className={'form-inline'}>
       <div className='form-group mx-sm-3 mb-2'>
         <label className='sr-only'>Username</label>
         <input
-          onChange={handleInputChange}
+          onChange={handleInputChange(setValue)}
           type='text'
           className='form-control'
           placeholder='username'
         />
       </div>
       <button type='submit' className='btn btn-primary mb-2'>
-        Request
+        Submit
       </button>
     </form>
   );
