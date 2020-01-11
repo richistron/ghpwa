@@ -1,0 +1,10 @@
+@import '~bootstrap/scss/bootstrap';
+
+.App {
+  @extend .container;
+  padding-top: 20px;
+
+  .ghuser {
+    @extend .jumbotron;
+  }
+}
