@@ -1,11 +1,13 @@
 import { IAppState } from './AppContext';
 import superStorage from './superStorage';
 
-export interface TAction {
-  type: 'LOAD_REPOS';
-  repos: IRepos[];
-  username: string;
-}
+export type TAction =
+  | {
+      type: 'LOAD_REPOS';
+      repos: IRepos[];
+      username: string;
+    }
+  | { type: 'LOAD_REPOS_ERROR'; error: string };
 
 export interface IRepos {
   id: number;
@@ -87,7 +89,8 @@ export interface IRepos {
 
 const INITIAL_STATE = superStorage.get('app') || {
   repos: {},
-  currentUser: ''
+  currentUser: '',
+  error: ''
 };
 
 const appReducer = (state?: IAppState, action?: TAction): IAppState => {
@@ -104,6 +107,14 @@ const appReducer = (state?: IAppState, action?: TAction): IAppState => {
     return superStorage.set('app', {
       ...newState,
       currentUser: action.username
+    });
+  }
+
+  if (action.type === 'LOAD_REPOS_ERROR') {
+    return superStorage.set('app', {
+      ...state,
+      error: action.error,
+      currentUser: ''
     });
   }
 

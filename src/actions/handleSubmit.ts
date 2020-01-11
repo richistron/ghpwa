@@ -2,13 +2,18 @@ import {TAppContext} from '../AppContext';
 import {SyntheticEvent} from 'react';
 import loadUserData from './loadUserData';
 
-const handleSubmit = (txt: string, context: TAppContext) => (e: SyntheticEvent) => {
+const handleSubmit = (txt: string, context: TAppContext) => async (e: SyntheticEvent) => {
   e.preventDefault();
-  loadUserData(txt).then(
-    response =>
-      context &&
-      context.dispatch({ type: 'LOAD_REPOS', repos: response, username: txt })
-  );
+  const response = await loadUserData(txt);
+  if (response.status === 404) {
+    context &&
+    context.dispatch({ type: 'LOAD_REPOS_ERROR', error: 'User not found'})
+  }
+  else {
+    const repos = await response.json();
+    context &&
+    context.dispatch({ type: 'LOAD_REPOS', repos, username: txt })
+  }
 };
 
 export default handleSubmit;

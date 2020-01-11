@@ -4,6 +4,7 @@ import { IRepos, TAction } from './appReducer';
 export interface IAppState {
   repos: { [key: string]: IRepos[] };
   currentUser: string;
+  error: string;
 }
 
 export type TAppContext = {

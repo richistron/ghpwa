@@ -4,7 +4,7 @@ import Starts from './Starts';
 
 function getCurrentUser(state: IAppState, currentUser: string) {
   const items = state.repos[currentUser] || null;
-  if (!items) {
+  if (!items || !Array.isArray(items)) {
     return null;
   }
   return [...items].sort((a, b) => b.stargazers_count - a.stargazers_count);
